@@ -11,13 +11,10 @@ shellcode : shellcode.o
 	MAIN_SYM_START=$$(echo $$MAIN_SYM_SPEC | awk '{print $$1}')
 	MAIN_SYM_LENGTH=$$(echo $$MAIN_SYM_SPEC | awk '{print $$2}')
 
-	echo "MAIN_SYM_START=$$MAIN_SYM_START"
-	echo "MAIN_SYM_LENGTH=$$MAIN_SYM_LENGTH"
-	echo "MAIN_SYM_OFFSET=$$MAIN_SYM_OFFSET"
-
 	dd if=shellcode.o of=shellcode bs=1 \
 		skip=$$((0x$$MAIN_SYM_START + 0x$$MAIN_SYM_OFFSET)) \
 		count=$$((0x$$MAIN_SYM_LENGTH))
+
 	rm shellcode.o
 shellcode.o : shellcode.c
 	$(CC) $(FLAGS) -c shellcode.c
