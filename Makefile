@@ -1,6 +1,6 @@
 .ONESHELL:
 CC = gcc
-FLAGS = -Wall -fPIC
+FLAGS = -Wall -fPIC -g
 
 all : loader shellcode
 loader : loader.c

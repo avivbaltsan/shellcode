@@ -13,8 +13,10 @@ int main() {
 	
 	// Now we can find out the process's base address
 	base_addr = caller_instruction - CALLER_INSTRUCTION_OFFSET;	
+	// And retrieve from it the vmem addr of printf@plt
 	printf_plt = base_addr + PRINTF_OFFSET;
-	printf_plt("I made it, mom!");
+	char text[] = "I made it, mom!\n";
+	printf_plt(text);
 
 	return 0;
 }
